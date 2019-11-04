@@ -27,7 +27,6 @@
 
 <body>
 
-    <input id="input" type="text" />
     <div class="container">
         <canvas id="canvas" width="500px" height="500px"></canvas>
     </div>
@@ -35,66 +34,33 @@
 
     <script>
 
-        var input = document.getElementById('input');
-
-
-
         const socket = io();
-        socket.on('connect', function () {
-
-            socket.on('msg', (msg) => {
-
-                console.log(msg)
-
-            });
-
-        })
-
-        
-        input.addEventListener('keydown', function (event) {
-            console.log(event.target.value)
-            socket.emit('teste', event.target.value)
-        });
-
-        socket.on('teste', function () {
-
-
-
-        })
-
-
-
-
-
-        const jogo = {
-            configuracoes: {
-                corFrutinha: 'green',
-                corJogadores: 'black',
-                tamanhoObjs: { width: 10, height: 10 }
-            },
-            jogadores: {
-                jogador1: {
-                    cordenadas: { x: 10, y: 30 },
-                    pontuacao: 0,
-                    keyIo: 'xxyz'
-                }
-            },
-            frutinhas: {
-                frutinha1: { x: 10, y: 50 }
-            }
-        }
+        var jogo;
 
         const canvas = document.getElementById('canvas');
         const context = canvas.getContext('2d');
 
-        renderJogo();
 
-        document.addEventListener('keydown', function (event) {
 
-            controle(jogo.jogadores.jogador1.cordenadas);
-            verificarCordenadasJogadoFrutinha(jogo.jogadores.jogador1);
+        socket.on('connect', function () {
+
+            renderJogo();
+
+
+            socket.emit('novo-jogador', socket.id);
+
+            socket.on('configuracaoes-jogo', function (configuracoes) {
+                jogo = configuracoes;
+                console.log(jogo.jogadores)
+            });
+
+
+
+
 
         });
+
+
 
         function renderJogo() {
 
@@ -139,25 +105,6 @@
                     break;
                 default:
                     break;
-            }
-
-        }
-
-        function verificarCordenadasJogadoFrutinha(jogador) {
-
-            //TODO Implentar direito 
-            if (jogador.cordenadas.x == jogo.frutinhas.frutinha1.x && jogador.cordenadas.y == jogo.frutinhas.frutinha1.y) {
-
-                const x = Math.round(Math.random() * 499 / 10) * 10;
-                const y = Math.round(Math.random() * 499 / 10) * 10;
-
-                jogo.frutinhas.frutinha1.x = x;
-                jogo.frutinhas.frutinha1.y = y;
-
-                jogador.pontuacao += 1;
-
-                console.log(jogador.pontuacao)
-
             }
 
         }
