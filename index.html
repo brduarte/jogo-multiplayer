@@ -43,20 +43,13 @@
 
 
         socket.on('connect', function () {
+            console.log('Jogador conectado.');
+        });
 
+        socket.on('configuracaoes-jogo', function (configuracoes) {
+            jogo = configuracoes;
+            console.log(jogo.jogadores)
             renderJogo();
-
-
-            socket.emit('novo-jogador', socket.id);
-
-            socket.on('configuracaoes-jogo', function (configuracoes) {
-                jogo = configuracoes;
-                console.log(jogo.jogadores)
-            });
-
-
-
-
 
         });
 

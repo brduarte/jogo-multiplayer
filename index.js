@@ -15,7 +15,7 @@ const jogo = {
         corJogadores: 'black',
         tamanhoObjs: { width: 10, height: 10 }
     },
-    jogadores: [],
+    jogadores: {},
     // {
     // jogador1: {
     //     cordenadas: { x: 10, y: 30 },
@@ -31,27 +31,15 @@ const jogo = {
 
 io.on('connection', (client) => {
 
-    jogo.jogadores.push({
-        id: client.id,
-        cordenadas: { x: gerarCordenadas(), y: gerarCordenadas() },
-        pontuacao: 0
-    });
+    adiconarJogador(client.id);
 
+    console.log(jogo.jogadores)
     io.emit('configuracaoes-jogo', jogo);
 
     client.on('disconnect', function () {
 
-        jogo.jogadores.forEach((jogador, index) => {
-
-            if (jogador.id == client.id) {
-                console.log('Desconectado ' + client.id)
-
-                jogo.jogadores.splice(index)
-
-            }
-
-        });
-
+        removerJogador(client.id);
+    
     });
 
 });
@@ -61,6 +49,21 @@ function gerarCordenadas() {
     return Math.round(Math.random() * 499 / 10) * 10;
 }
 
+function removerJogador(idClient) {
+    delete jogo.jogadores[idClient];
+}
+
+function adiconarJogador(key) {
+  
+    return jogo.jogadores[key] ={
+        cordenadas:{
+            x: gerarCordenadas(),
+            y: gerarCordenadas()
+        }
+    }
+
+}
+
 http.listen('8000', function () {
-    console.log('Server ligado');
+    console.log('http://localhost:8000');
 });
