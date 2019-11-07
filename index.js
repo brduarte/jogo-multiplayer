@@ -11,8 +11,7 @@ app.get('/', function (req, res) {
 
 const jogo = {
     configuracoes: {
-        corFrutinha: 'green',
-        corJogadores: 'black',
+        corFrutinha: '#5b865e',
         tamanhoObjs: { width: 10, height: 10 }
     },
     jogadores: {},
@@ -21,6 +20,7 @@ const jogo = {
     //     cordenadas: { x: 10, y: 30 },
     //     pontuacao: 0,
     //     keyIo: 'xxyz'
+    //     cor: yello
     // }
     // },
     frutinhas: {
@@ -28,18 +28,24 @@ const jogo = {
     }
 }
 
-
 io.on('connection', (client) => {
 
     adiconarJogador(client.id);
 
-    console.log(jogo.jogadores)
     io.emit('configuracaoes-jogo', jogo);
 
     client.on('disconnect', function () {
-
         removerJogador(client.id);
-    
+        atualizarJogadores();
+    });
+
+    client.on('movimento-jogador', function (keyCode) {
+
+        let jogador = jogo.jogadores[client.id];
+        controle(keyCode, jogador);
+        pontuarJogador(jogador);
+        atualizarJogadores();
+
     });
 
 });
@@ -54,14 +60,58 @@ function removerJogador(idClient) {
 }
 
 function adiconarJogador(key) {
-  
-    return jogo.jogadores[key] ={
-        cordenadas:{
+
+    return jogo.jogadores[key] = {
+        cordenadas: {
+            x: gerarCordenadas(),
+            y: gerarCordenadas()
+        },
+        pontuacao: 0,
+        cor: 'rgba(128,128,128,0.5)',
+    }
+
+}
+
+function controle(keyCode, jogador) {
+
+    if (jogador.cordenadas.x !== 0 && keyCode === 37) {
+        jogador.cordenadas.x -= 10;
+        return;
+    }
+
+    if (jogador.cordenadas.y !== 0 && keyCode === 38) {
+        jogador.cordenadas.y -= 10;
+        return;
+    }
+
+    if (jogador.cordenadas.x !== 490 && keyCode === 39) {
+        jogador.cordenadas.x += 10;
+        return;
+    }
+
+    if (jogador.cordenadas.y !== 490 && keyCode === 40) {
+        jogador.cordenadas.y += 10;
+        return;
+    }
+
+}
+
+function pontuarJogador(jogador) {
+
+    if (jogador.cordenadas.x === jogo.frutinhas.frutinha1.x && jogador.cordenadas.y === jogo.frutinhas.frutinha1.y) {
+        jogador.pontuacao++;
+        console.log(jogador.pontuacao);
+        jogo.frutinhas.frutinha1 = {
             x: gerarCordenadas(),
             y: gerarCordenadas()
         }
     }
 
+}
+
+function atualizarJogadores() {
+    io.emit('atualizar-jogador', jogo.jogadores);
+    io.emit('atualizar-frutinha', jogo.frutinhas);
 }
 
 http.listen('8000', function () {

@@ -12,7 +12,7 @@
 <style>
     .container {
         display: flex;
-        width: 50%;
+        width: 80%;
         margin-left: auto;
         margin-right: auto;
         justify-content: center;
@@ -23,24 +23,43 @@
         image-rendering: optimizeQuality;
         border: 4px solid whitesmoke;
     }
+
+    #placar {
+        font-size: small;
+        list-style: none;
+        padding: 0;
+        margin-left: 5px;
+    }
+
+    #placar>#lista {
+        list-style: none;
+        padding: 0;
+        color: black;
+
+    }
 </style>
 
 <body>
 
     <div class="container">
         <canvas id="canvas" width="500px" height="500px"></canvas>
+        <div id="placar">
+            Jogadores
+            <ul id="lista">
+
+            </ul>
+        </div>
     </div>
 
 
     <script>
 
         const socket = io();
-        var jogo;
+        let jogo;
 
         const canvas = document.getElementById('canvas');
         const context = canvas.getContext('2d');
-
-
+        const lista = document.getElementById('lista');
 
         socket.on('connect', function () {
             console.log('Jogador conectado.');
@@ -48,12 +67,20 @@
 
         socket.on('configuracaoes-jogo', function (configuracoes) {
             jogo = configuracoes;
-            console.log(jogo.jogadores)
             renderJogo();
+            renderlLista();
+        });
+
+        socket.on('atualizar-jogador', function (jogadores) {
+            jogo.jogadores = jogadores
+        });
+
+        socket.on('atualizar-frutinha', function (frutinhas) {
+            jogo.frutinhas = frutinhas;
 
         });
 
-
+        movimentoJogador();
 
         function renderJogo() {
 
@@ -69,7 +96,12 @@
             for (const idJogador in jogo.jogadores) {
 
                 const jogador = jogo.jogadores[idJogador];
-                context.fillStyle = jogo.configuracoes.corJogadores;
+
+                if (idJogador === socket.id) {
+                    jogador.cor = '#ebdf2c';
+                }
+
+                context.fillStyle = jogador.cor;
                 context.fillRect(jogador.cordenadas.x, jogador.cordenadas.y, jogo.configuracoes.tamanhoObjs.width, jogo.configuracoes.tamanhoObjs.height);
 
             }
@@ -78,27 +110,32 @@
 
         }
 
+        function movimentoJogador() {
 
-        function controle(jogador) {
+            document.addEventListener('keydown', function (event) {
+                socket.emit('movimento-jogador', event.keyCode);
+            });
 
-            const keyCode = event.keyCode
+        }
 
-            switch (keyCode) {
-                case 37: //esquerda
-                    jogador.x -= 10
-                    break;
-                case 38: //cima
-                    jogador.y -= 10
-                    break;
-                case 39: //direita
-                    jogador.x += 10
-                    break;
-                case 40: //baixo
-                    jogador.y += 10
-                    break;
-                default:
-                    break;
+        function renderlLista() {
+
+            let html = '';
+            let idJogadorColor = '';
+
+            for (const idJogador in jogo.jogadores) {
+                const jogador = jogo.jogadores[idJogador];
+                html += "<li id='" + idJogador + "'>" + idJogador + " - " + jogador.pontuacao + "</li>";
+
+                if (idJogador === socket.id) {
+                    idJogadorColor = socket.id;
+                }
             }
+
+            lista.innerHTML = html;
+            document.getElementById(idJogadorColor).style.color = '#ebdf2c';
+
+            requestAnimationFrame(renderlLista)
 
         }
 
