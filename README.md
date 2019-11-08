@@ -20,7 +20,7 @@ Seu aplicativo agora deve estar sendo executado em [localhost:3000](http://local
 
 Você pode fazer um teste rapino clicando no link ➡️ [jogo-multiplay.herokuapp.com](https://jogo-multiplay.herokuapp.com/)
 
-## Documentação
+## Documentação 📝
 
 Para obter mais informações das ferramentas utilizadas:
 
