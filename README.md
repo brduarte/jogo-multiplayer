@@ -1,26 +1,26 @@
-# Jogo Multiplayer 🕹️
+# 🕹️ Jogo Multiplayer 
 
-## Ferramentas utilizadas ⚒️
+## ⚒️ Ferramentas utilizadas 
   
   - Node.js
   - Express
   - Socket.io
 
-## Executando localmente 👨‍💻
+## 👨‍💻 Executando localmente 
 
 Assegure-se de ter [Node.js](http://nodejs.org/) instalado
 
 ```shell script
-$ git clonehttps://github.com/brduarte/Jogo-Multiplay.git # ou clone seu próprio fork
+$ git clone https://github.com/brduarte/Jogo-Multiplayer.git # ou clone seu próprio fork
 $ cd Jogo-Multiplayer
 $ npm install
 $ npm start
 ```
 Seu aplicativo agora deve estar sendo executado em [localhost:3000](http://localhost:3000/).
 
-Você pode fazer um teste rapido em ➡️ [jogo-multiplayer.herokuapp.com](https://jogo-multiplayer.herokuapp.com/)
+Você pode fazer um teste rápido em ➡️ [jogo-multiplayer.herokuapp.com](https://jogo-multiplayer.herokuapp.com/)
 
-## Documentação 📝
+## 📝 Documentação 
 
 Para obter mais informações das ferramentas utilizadas:
 
