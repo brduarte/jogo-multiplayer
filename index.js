@@ -3,6 +3,7 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
 const path = require('path');
+const port = process.env.PORT || 3000;
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
@@ -114,4 +115,4 @@ function atualizarJogadores() {
     io.emit('atualizar-frutinha', jogo.frutinhas);
 }
 
-http.listen('80');
+http.listen(port);
