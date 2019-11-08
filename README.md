@@ -1,4 +1,4 @@
-# Jogo-Multiplay 🕹️
+# Jogo Multiplayer 🕹️
 
 ## Ferramentas utilizadas ⚒️
   
