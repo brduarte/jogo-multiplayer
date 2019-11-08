@@ -37,5 +37,5 @@ Código baseado na playlist do canal no YouTube [Felipe Deschamps](https://www.y
 
 ## Autor
 
-| [<img width="150px" src="https://avatars2.githubusercontent.com/u/29002558?v=4"><br><sub>@brduarte</sub>](https://github.com/brduarte)|
+| [<img width="100px" src="https://avatars2.githubusercontent.com/u/29002558?v=4"><br><sub>@brduarte</sub>](https://github.com/brduarte)|
 | :---: |
