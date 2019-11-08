@@ -1,12 +1,12 @@
-# Jogo-Multiplay
+# Jogo-Multiplay 🕹️
 
-## Ferramentas utilizadas
+## Ferramentas utilizadas ⚒️
   
   - Node.js
   - Express
   - Socket.io
 
-## Executando localmente
+## Executando localmente 👨‍💻
 
 Assegure-se de ter [Node.js](http://nodejs.org/) instalado
 
@@ -18,7 +18,7 @@ $ npm start
 ```
 Seu aplicativo agora deve estar sendo executado em [localhost:3000](http://localhost:3000/).
 
-Você pode fazer um teste rapino do link ➡️ [jogo-multiplay.herokuapp.com](https://jogo-multiplay.herokuapp.com/)
+Você pode fazer um teste rapino clicando no link ➡️ [jogo-multiplay.herokuapp.com](https://jogo-multiplay.herokuapp.com/)
 
 ## Documentação
 
