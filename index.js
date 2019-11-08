@@ -114,6 +114,6 @@ function atualizarJogadores() {
     io.emit('atualizar-frutinha', jogo.frutinhas);
 }
 
-http.listen('80', function () {
-    console.log('http://localhost');
+http.listen('80','127.0.0.1', function () {
+    console.log('http://127.0.0.1')
 });
