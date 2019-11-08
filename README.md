@@ -18,7 +18,7 @@ $ npm start
 ```
 Seu aplicativo agora deve estar sendo executado em [localhost:3000](http://localhost:3000/).
 
-Você pode fazer um teste rapino clicando no link ➡️ [jogo-multiplay.herokuapp.com](https://jogo-multiplay.herokuapp.com/)
+Você pode fazer um teste rapino clicando no link ➡️ [jogo-multiplayer.herokuapp.com](https://jogo-multiplayer.herokuapp.com/)
 
 ## Documentação 📝
 
