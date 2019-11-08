@@ -1,6 +1,9 @@
 # Jogo-Multiplay
 
-#Ferramentas utilizadas
+# Ferramentas utilizadas
+  
+  Node.js
+  Socket.io
 
 
 ## Running Locally
