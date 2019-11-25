@@ -30,7 +30,7 @@ Para obter mais informações das ferramentas utilizadas:
 
 ## Fontes
 
-Código baseado na playlist do canal no YouTube [Felipe Deschamps](https://www.youtube.com/watch?v=0sTfIZvjYJk&list=PLMdYygf53DP5SVQQrkKCVWDS0TwYLVitL): 
+Código baseado na playlist do canal no YouTube [Filipe Deschamps](https://www.youtube.com/watch?v=0sTfIZvjYJk&list=PLMdYygf53DP5SVQQrkKCVWDS0TwYLVitL): 
 
 | [<img src="https://avatars0.githubusercontent.com/u/4248081?v=3&s=115"><br><sub>@filipedeschamps</sub>](https://github.com/filipedeschamps) |
 | :---: |
